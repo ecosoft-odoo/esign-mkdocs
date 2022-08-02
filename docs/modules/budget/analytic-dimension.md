@@ -1,0 +1,1 @@
+Analytic Dimensions การจัดการงบประมาณตามโครงสร้างองค์กร ทำงานร่วมกับ Organization structure Module (Cost Center) และสามารถเพิ่มเติมมุมมองการบริหารงบประมาณอื่นๆ ใน Analytic Dimension ได้ เช่น โครงการ แผนงาน เป็นต้น

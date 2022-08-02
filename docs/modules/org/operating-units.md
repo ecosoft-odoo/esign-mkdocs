@@ -1,0 +1,1 @@
+Operating Units โครงสร้างองค์กรแบบ Business Unit ซึ่งแต่ละ Unit สามารถทำงานเป็นเอกเทศ หรือเป็น Shared Service และกำหนดการเข้าถึงเอกสารของแต่ละ Unit ได้
