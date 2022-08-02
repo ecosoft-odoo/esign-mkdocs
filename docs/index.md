@@ -1,11 +1,11 @@
-# Welcome to Thai eGov
+# กระบวนการลงนามแบบ อิเล็กทรอนิกส์ สำหรับภายใน และบุคคลภายนอก
 
-This documentation is part of ...
+โครงการนี้เป็นการปรับปรุงระบบต่อจากระบบ PABI2.1 โดยเน้นไปที่การมีส่วนร่วมในการพิจรณาอนุมัติการจัดซื้อจากทั้ง
 
-- Test 1
-- Test 2
+1. ผู้มีส่วนได้เสีย ซึ่งเป้นบุคลากรภายใน (โดยใช้ sub-states และ camunda workflow)
+2. ผู้ขาย ซึ่งเป็นบุคคลภายนอกระบบ (โดยใช้ eSign)
 
-## Modules Coverage
+โดยเป้นการเพิ่มเติมกระวนการมีส่วนร่วม (sub-states) แทรกเพิ่มเติมระหว่างกระบวนการเดิม
 
-- XXX
-- YYY
+1. Call for Bid ระหว่างสถาะ Bid Approved -> PO Created
+2. Purchase Order ระหว่างสถานะ Waiting to Verify -> Waiting to Release

@@ -1,1 +1,0 @@
-วิธีการจัดซื้อจัดจ้าง Procurement method

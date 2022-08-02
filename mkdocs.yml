@@ -1,10 +1,10 @@
-site_name: Thai eGov ERP
+site_name: PABI2 eSign
 theme:
   name: material
   palette:
-    primary: white
-  logo: assets/logo.png
-  favicon: assets/logo.png
+    primary: teal
+  logo: logo.png
+  favicon: logo.png
   features:
     - navigation.instant
     - navigation.tracking
@@ -13,77 +13,12 @@ theme:
     - navigation.sections
 nav:
   - Overview: index.md
-  - Organization:
-      - Overview: modules/org/overview.md
-      - Configuraton:
-          - Company: modules/org/company.md
-      - Master Data:
-          - Operating Units: modules/org/operating-units.md
-          - Org Structure: modules/org/organizaton-structure.md
-      - Business Process:
-          - Approval Workflow: modules/org/approval-workflow.md
-      - Reports:
-          - Reports: modules/org/reports.md
-  - Budgeting:
-      - Overview: modules/budget/overview.md
-      - Configuration:
-          - Budget Control: modules/budget/budget-control.md
-          - Budget Commitment & VAT: modules/budget/budget-vat.md
-      - Master Data:
-          - Budget Fiscal Year: modules/budget/budget-fiscalyear.md
-          - Analytic Dimensions: modules/budget/analytic-dimension.md
-          - Source of Fund: modules/budget/source-of-fund.md
-          - Budget Control (KPI): modules/budget/budget-kpi.md
-      - Business Process:
-          - Budget Plan: modules/budget/budget-plan.md
-          - Budget Control Sheet: modules/budget/budget-control-sheet.md
-          - Budget Transfer: modules/budget/budget-transfer.md
-          - Year End Closing: modules/budget/year-end-closing.md
-      - Reports:
-          - Budget Monitor: modules/budget/budget-monitor.md
-          - Source of Fund Monitor: modules/budget/source-of-fund-monitor.md
-  - Procurement:
-      - Overview: modules/purchase/overview.md
-      - Configurations:
-          - Procurement Types: modules/purchase/procurement-type.md
-          - Procurement Committee: modules/purchase/procurement-committee.md
-      - Master Data:
-          - Main Master Data: modules/purchase/master-data.md
-          - Procurement Methods: modules/purchase/procurement-method.md
-          - Guarantee Types: modules/purchase/guarantee-type.md
-          - Vendor Evaluation: modules/purchase/vendor-evaluation.md
-      - Business Process:
-          - Purchase Request: modules/purchase/purchase-request.md
-          - Purchase Agreement: modules/purchase/purchase-agreement.md
-          - Purchase Order: modules/purchase/purchase-order.md
-          - Purchase Invoice Plan: modules/purchase/purchase-invoice-plan.md
-          - Work Acceptance: modules/purchase/work-acceptance.md
-          - Purchase Guarantee: modules/purchase/purchase-guarantee.md
-      - Reports:
-          - Procurement Report: modules/purchase/procurement-report.md
-          - Non-Procurement Report: modules/purchase/non-procurement-report.md
-          - Late Delivery Report: modules/purchase/late-delivery-report.md
-  - Accounting:
-      - Overview: modules/account/overview.md
-      - Configurations:
-          - Tax Organization: modules/account/tax-organization.md
-          - Picking Method: modules/account/inventory-method.md
-          - Inventory Method: modules/account/valuation-method.md
-      - Master Data:
-          - Account Master Data: modules/account/account-master-data.md
-          - Finance Master Data: modules/account/finance-master-data.md
-          - Thai Localization: modules/account/l10n-thailand.md
-          - GFMIS / CFS: modules/account/gfmis-cfs.md
-      - Business Process:
-          - Income: modules/account/income.md
-          - Expense: modules/account/expense.md
-          - Others: modules/account/others.md
-      - Reports:
-          - Accounting Reports: modules/account/account-report.md
-          - Thai Reports: modules/account/thai-report.md
-  - Agreement:
-      - Overview: modules/agreement/overview.md
-  - Asset:
-      - Overview: modules/asset/overview.md
-  - Inventory:
-      - Overview: modules/stock/overview.md
+  - Specs:
+      - Overview: specs/overview.md
+      - Call for Bid: specs/pd.md
+      - Purchase Order: specs/po.md
+  - Manual:
+      - Overview: manual/overview.md
+  - Meetings:
+      - 02/08/2022: meetings/02-08-2022.md
+  - References: reference.md
