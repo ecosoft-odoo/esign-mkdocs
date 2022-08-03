@@ -2,7 +2,7 @@ site_name: PABI2 eSign
 theme:
   name: material
   palette:
-    primary: teal
+    primary: white
   logo: logo.png
   favicon: logo.png
   features:
