@@ -14,7 +14,6 @@ theme:
 nav:
   - Overview: index.md
   - Specs:
-      - Overview: specs/overview.md
       - Call for Bid: specs/pd.md
       - Purchase Order: specs/po.md
       # - Call for Bid: specs/pd.md
