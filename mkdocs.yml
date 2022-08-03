@@ -15,9 +15,15 @@ nav:
   - Overview: index.md
   - Specs:
       - Overview: specs/overview.md
+      - Call for Bid: specs/pd.md
+      - Purchase Order: specs/po.md
       # - Call for Bid: specs/pd.md
       # - Purchase Order: specs/po.md
   - Manual:
       - Overview: manual/overview.md
   - Meetings:
       - 02/08/2022: meetings/02-08-2022.md
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
