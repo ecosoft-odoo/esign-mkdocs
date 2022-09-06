@@ -65,16 +65,68 @@
 
 #### พิมพ์ฟอร์ม Approve PO Form
 
-    NOT DONE YET, this part should be done by coding
+ระบบ print เอกสารจาก Approve PO Form แล้วแนบไฟล์เข้าไปที่เอกสารนั้นให้อัตโนมัติ โดยที่ชื่อไฟล์แนบจะเป็นเลขที่เอกสาร
+
+![](pics/po4_1.png)
 
 #### ส่ง Intray Message
 
-    NOT DONE - Waiting for message sample message from O+
+ข้อความแจ้งเตือนจะส่งให้ 4 กลุ่ม โดยดูจากเอกสาร PD
 
-#### ยิง API start Camunda Wofkflow
+1. เจ้าหน้าที่พัสดุ (Responsible)
+2. หัวหน้าเจ้าหน้าที่พัสดุ (Verified by)
+3. ผู้มีส่วนได้เสีย (Bid Verify)
+4. ผู้มีอำนาจอนุมัติ (PR. Approver)
 
-    NOT DONE - Need to discuss with Bon Bordin for required data/links
-    Public attachment is doe with route /get_purchase_attachment?attachment_id=1234
+โดยรูปแบบข้อความจะเป็น
+
+    <เลขที่เอกสาร PO> » <Procurement Type จาก PD> <วัตถุประสงค์จาก PD>
+    ยอดรวม <ยอดรวมเอกสาร PO (ถ้าเป็นสกุลเงินต่างประเทศ ระบบจะแปลงให้เป็น บาท)> บาท
+
+ตัวอย่าง
+
+![](pics/po4_2.png)
+
+#### ยิง API start Camunda Workflow
+
+การตั้งค่าระบบเชื่อมกับ Camunda Workflow
+
+1. ไปที่เมนู Settings > Configuration > PABI Web.
+2. เปิด Open Connection to PABI Web. แล้วจะเห็น Field ใหม่ชื่อ PABI Web URL for Camunda
+
+    ![](pics/po4_3.png)
+
+    - ฐานทดสอบจะใช้ **http://%s:%s@w-test.nstda.or.th:3030/xmlrpc/interface**
+    <br/>ซึ่ง %s ระบบจะดึง Username และ Password จาก System Parameters
+
+3. กดปุ่ม Apply
+
+ข้อมูลที่ใช้ในการส่งค่า API Camunda Workflow
+
+    arg = {
+        "poNo": "PO16000003",  # เลขที่เอกสาร PO
+        "sectionId": "1",  # ID ของ section จาก responsible person ที่เอกสาร PD
+        "docType": "PD4",  # ประเภทเเอกสารใน Procurement Method ที่เอกสาร PD
+        "objective": "Buy Something 1 piece",  # Objective ที่เอกสาร PD
+        "total": "100000.00",  # ยอดเงินรวม (สกุลเงินบาท)
+        "reqBy": "002648", # employee code จาก responsible person ที่เอกสาร PD
+        "purchaseMethod": "PD4-เฉพาะเจาะจง",  # <docType>-Procurement Method ที่เอกสาร PD
+        "doc": {  # เอกสารแนบที่ระบบสร้างให้
+            "name": "pd2000001.pdf",
+            # public link -> ระบบจะดูจาก url จาก parameter web.base.url และต่อด้วย /get_purchase_attachment?attachment_id=<id ของเอกสารแนบ>
+            # http://google.com/get_purchase_attachment?attachment_id=100
+            "url": "http://google.com"
+        }
+        "attachments": [  # เอกสารแนบเพิ่มเติมอื่น (ชื่อห้ามซ้ำกับเลขที่เอกสาร)
+            {
+                "name": "pd2000001.pdf",
+                "url": "http://google.com"
+            }
+        ]
+    }
+
+หลังจากได้ข้อมูลในการส่งแล้ว ระบบจะส่งด้วย function po.action(arg)
+เพื่อส่งข้อมูลให้ Camunda
 
 #### ดึงข้อมูล Workflow จาก Camunda
 
