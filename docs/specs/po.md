@@ -130,31 +130,43 @@
 
 #### ดึงข้อมูล Workflow จาก Camunda
 
-    NOT DONE - this is similar to Approval History in Call for Bid, need to talk to Bon Bordin
-
 ![](pics/po_approval_history.png)
 
-1. ข้อมูลเริ่มต้นได้มาตอนยิง API
-2. สามารถกดปุ่มเพื่อดึง updates
+1. สามารถกดปุ่มเพื่อดึง updates
+2. ข้อมูลลำดับการอนุมัติ
 3. ตารางแสดง Approval History
 
 ---
 
 ### Substate: PO Approved
 
-![](pics/po5.png)
+เมื่อ Camunda Workflow จบ จะส่ง API กลับมาเพื่ออัพเดทสถานะ โดยข้อมูลที่ส่งกลับมาจะเป็น
 
-เมื่อ Camunda Workflow จบ จะส่ง API กลับมาเพื่ออัพเดทสถานะเป็น PO Approved
+    {
+        "name": "POxxxxxxxx",
+        "action": "C1",  # C1 = Approved, W1 = Rejected
+        "approve_uid": "123456",  # Employee Code
+        "comment": "xxxx"
+    }
 
-    NOT DONE, need to create incoming API for Camunda
+- กรณี Rejected (action = W1)
 
-เจ้าหน้าที่พัดสุจะกดปุ่ม Send to Supplier Confirm โดย
+    1. สถานะหลัก (state) ของเอกสารถูกเปลี่ยนเป็น "Rejected" พร้อมเหตุผลใน Reason Tab
+    ![](pics/po5_2.png)
+    2. จบการทำงาน (ผู้ใช้งานต้องกลับไปแก้ไขและส่งเอกสารใหม่)
 
-* ระบบจะแสดง Wizard ให้เลือก Supplier Contacts
-* จะมีบาง Contact ที่ยังไม่ได้ลงทะเบียนในระบบ เจ้าหน้าที่พัสดุจะแจ้งไปที่ Contact นั้นๆเพื่อเข้ามาลงทะเบียนกับสวทช
-* เมื่อลงทะเบียนแล้วระบบ PABI2 จะต้องมีความสามารถไป Sync ข้อมูลกลับมาที่ Supplier 
-    
-        NOT DONE, need to talk to Ball Siam on how to sync
+- กรณี Approved (action = C1)
+
+    1. สถานะย่อย (sub-state) ของเอกสารจะถูกเปลี่ยนเป็น "PO Approved"
+    ![](pics/po5.png)
+    2. แสดงชื่อผู้อนุมัติคนสุดท้าย (Approved PO by) และวันที่ส่งกลับมา (Approved PO Date) ใน Deliveries & Invoices Tab
+    ![](pics/po5_1.png)
+    3. เจ้าหน้าที่พัดสุจะกดปุ่ม Send to Supplier Confirm โดย
+        * ระบบจะแสดง Wizard ให้เลือก Supplier Contacts
+        * จะมีบาง Contact ที่ยังไม่ได้ลงทะเบียนในระบบ เจ้าหน้าที่พัสดุจะแจ้งไปที่ Contact นั้นๆเพื่อเข้ามาลงทะเบียนกับสวทช
+        * เมื่อลงทะเบียนแล้วระบบ PABI2 จะต้องมีความสามารถไป Sync ข้อมูลกลับมาที่ Supplier 
+            
+                NOT DONE, need to talk to Ball Siam on how to sync
 
 ---
 
