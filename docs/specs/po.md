@@ -161,12 +161,12 @@
     ![](pics/po5.png)
     2. แสดงชื่อผู้อนุมัติคนสุดท้าย (Approved PO by) และวันที่ส่งกลับมา (Approved PO Date) ใน Deliveries & Invoices Tab
     ![](pics/po5_1.png)
-    3. เจ้าหน้าที่พัดสุจะกดปุ่ม Send to Supplier Confirm โดย
-        * ระบบจะแสดง Wizard ให้เลือก Supplier Contacts
-        * จะมีบาง Contact ที่ยังไม่ได้ลงทะเบียนในระบบ เจ้าหน้าที่พัสดุจะแจ้งไปที่ Contact นั้นๆเพื่อเข้ามาลงทะเบียนกับสวทช
-        * เมื่อลงทะเบียนแล้วระบบ PABI2 จะต้องมีความสามารถไป Sync ข้อมูลกลับมาที่ Supplier 
-            
-                NOT DONE, need to talk to Ball Siam on how to sync
+    3. เจ้าหน้าที่พัดสุจะกดปุ่ม Send to Supplier Confirm โดยเลือกผู้เซ็นเอกสารที่ Contact Sign Tab
+        - กรณีที่เป็นบริษัท: แสดงข้อมูลของบุคคลที่อยู่ในบริษัททั้งหมด
+        - กรณีที่เป็นบุคคล: แสดงข้อมูลของบุคคลนั้น
+        - กรณีที่มีบุคคลในบริษัทเพิ่ม เจ้าหน้าที่พัสดุสามารถกด Update Contact Sign เพื่อให้ระบบแสดงรายชื่อใหม่
+        - สามารถเลือกผู้เซ็นเอกสารได้เพียงคนเดียว โดยคลิกที่ Use Sign
+        ![](pics/po5_3.png)
 
 ---
 
@@ -177,6 +177,49 @@
 สถานะนี้เป็นการส่งต่อไปที่ระบบ eSign โดยระบบจะดำเนินการดังต่อไปนี้
 
 1. ยิง API ไปที่ eSign โดยส่งไฟล์ PDF ของ Approve PO Form ไปด้วย
+
+    - ข้อมูลส่งเข้า eSign
+
+            {
+                "state": "sent",
+                "doctype": "internal",
+                "upload_type": "sent_auth",
+                "upload_file": base64.b64encode(result),  # ไฟล์ pdf จาก Approve PO Form
+                "upload_file_name": u"{}.{}".format(self.name, report_type),
+                "user_id": "123456",  # รหัสพนักงานคนที่ทำรายการ
+                "file_storage_interval_type": "days",
+                "file_storage_interval_number": 5,
+                "callback_url": "https://google.com",
+                "owner_ids": ['abcde@fgh.ijk'],  # email ผู้รับผิดชอบ
+                "partner_ids": [  # ข้อมูลผู้เซ็นเอกสาร
+                    {
+                        "is_employee": False,
+                        "idcard": signer.vat,
+                        "email": signer.email,
+                        "name": signer.name,
+                        'lines': [  # ตำแหน่งการประทับตราและลายเซ็นของบุคคลนั้น
+                            {
+                                "type": "signature",
+                                "width": "0.19",
+                                "height": "0.03",
+                                "posX": "0.59",
+                                "posY": "0.81",
+                                "page": "1",
+                            },
+                            {  # ถ้าบริษัท หรือบุคคลนั้นมีคำว่า "และประทับตรา" ให้ส่งตราประทับด้วย
+                                "type": "seal_stamp",
+                                "seal_stamp": "base64...",
+                                "width": "0.14",
+                                "height": "0.03",
+                                "posX": "0.63",
+                                "posY": "0.88",
+                                "page": '1',
+                            }
+                        ]
+                    }
+                ],
+            }
+
 2. ส่ง Email ไปที่ Contacts พร้อมแนบไฟล์ไปด้วย
 
         NOT DONE, need to talk to Ball Siam on how to API
