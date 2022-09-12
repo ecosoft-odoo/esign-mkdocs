@@ -176,7 +176,22 @@
 
 สถานะนี้เป็นการส่งต่อไปที่ระบบ eSign โดยระบบจะดำเนินการดังต่อไปนี้
 
-1. ยิง API ไปที่ eSign โดยส่งไฟล์ PDF ของ Approve PO Form ไปด้วย
+1. ตั้งค่าการเชื่อมต่อกับระบบ eSign
+    1. ไปที่เมนู Settings > Configuration > PABI Web.
+    2. เปิด Open Connection to PABI Web. แล้วจะเห็น Field ใหม่ชื่อ Connect e-Sign
+    3. เมื่อคลิกเชื่อมต่อ ระบบจะให้กรอก Host, Database ในการเชื่อมต่อ > Save
+
+        ![](pics/po6_1.png)
+    
+    4. สร้าง / เปลี่ยน Username, Password สำหรับการเชื่อมต่อได้ที่เมนู Settings > Technical > Parameters > System Parameters
+
+        ![](pics/po6_2.png)
+
+        - esign_username: กรอก username สำหรับเชื่อมต่อระบบ eSign
+        - esign_password: กรอก password สำหรับเชื่อมต่อระบบ eSign
+
+
+2. ยิง API ไปที่ eSign โดยส่งไฟล์ PDF ของ Approve PO Form ไปด้วย
 
     - ข้อมูลส่งเข้า eSign
 
@@ -189,7 +204,8 @@
                 "user_id": "123456",  # รหัสพนักงานคนที่ทำรายการ
                 "file_storage_interval_type": "days",
                 "file_storage_interval_number": 5,
-                "callback_url": "https://google.com",
+                # public link -> ระบบจะดูจาก url จาก parameter web.base.url และต่อด้วย /get_purchase_state_signed?model=purchase.order&po_id=<id ของเอกสาร PO>
+                "callback_url": "<url>/get_purchase_state_signed?model=purchase.order&po_id=<id po>",
                 "owner_ids": ['abcde@fgh.ijk'],  # email ผู้รับผิดชอบ
                 "partner_ids": [  # ข้อมูลผู้เซ็นเอกสาร
                     {
@@ -220,7 +236,15 @@
                 ],
             }
 
-2. ส่ง Email ไปที่ Contacts พร้อมแนบไฟล์ไปด้วย
+3. ส่งข้อมูลกลับมา เมื่อระบบ eSign ทำกระบวนการเซ็นเอกสารเสร็จสิ้น
+    - eSign จะเรียก function callback_url จากข้อมูลที่ระบบส่งไป
+    - เมื่อ call function ระบบจะดึงข้อมูล pdf ที่มีการเซ็นแล้วในระบบ eSign มาเก็บไว้ใน Attachment เพิ่มเติม โดยมีชื่อ "_signed" ต่อท้าย
+    - สถานะเปลี่ยนเป็น Waiting to Release
+
+        ![](pics/po6_3.png)
+
+
+4. ส่ง Email ไปที่ Contacts พร้อมแนบไฟล์ไปด้วย
 
         NOT DONE, need to talk to Ball Siam on how to API
 
