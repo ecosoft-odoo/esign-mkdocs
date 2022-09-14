@@ -49,6 +49,7 @@
 
 1. เลือก Approve PO Form เพื่อเตรียมแนบเป็น attachment
 2. กดปุ่ม Send to Approval
+3. กรณีที่มีการยกเลิก / เปลี่ยนแปลงการทำเอกสาร
 
 ---
 
@@ -265,3 +266,4 @@
 !!! note
 
     * ปุ่ม Verify แบบปกติจะใช้ได้เมื่อ Substate ยังเป็น Ready เท่านั้น เมื่อ Substate ทำงานแล้ว ระบบจะไม่ยอมให้กดปุ่ม (show warning)
+    * กรณีที่ Substate เป็น Waiting Approval หรือ Waiting Supplier Confirm จะไม่สามารถ Cancel หรือ Set to Draft เอกสารได้
