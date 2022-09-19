@@ -1,16 +1,17 @@
 ## As-Is
 
 เมื่อสถานะของเอกสาร Purchase Order เปลี่ยนจาก Bid Selection เป็น **Waiting to Verify**
-หัวหน้าพัสดุจะเป็นคนกดปุ่ม "Verify" เพื่อเปลี่ยนสถานะเป้น **Waiting to Release** โดยไม่ต้องมีการอนุมัติใดๆเพิ่มเติม
+หัวหน้าพัสดุจะเป็นคนกดปุ่ม "Verify" เพื่อเปลี่ยนสถานะเป็น **Waiting to Release** โดยไม่ต้องมีการอนุมัติใดๆเพิ่มเติม
 
 และกดปุ่ม "Release" เพื่อเปลี่ยนสถานะเป็น **PO Released**
 
 ## To-Be
 
+เมื่อสถานะของเอกสารเปลี่ยนเป็น **Waiting to Verify** เราต้องการให้มีการลงนาม
+จาก
 
-
-เมื่อสถานะของเอกสารเปลี่ยนเป้น **Waiting to Verify** เราต้องการให้มีการลงนาม
-จาก 1) บุคคลภายในผ่าน Camunda Workflow และตามด้วย 2) บุคคลภายนอกผ่านระบบ eSign (Supplier's Contacts)
+1. บุคคลภายในผ่าน Camunda Workflow
+2. บุคคลภายนอกผ่านระบบ eSign (Supplier's Contacts)
 
 โดยระบบจะเพิ่มให้มี **Sub States** ระหว่างสถานะ **Waiting to Verify** ดังรูป เพื่อติดตามสถานะของการลงนามก่อนที่จะเปลี่ยนสถานะเป็น **Waiting to Release** เพื่อกลับเข้า Flow ปกติ
 
@@ -49,6 +50,7 @@
 
 1. เลือก Approve PO Form เพื่อเตรียมแนบเป็น attachment
 2. กดปุ่ม Send to Approval
+3. กรณีที่มีการยกเลิก / เปลี่ยนแปลงการทำเอกสาร
 
 ---
 
@@ -179,7 +181,7 @@
 1. ตั้งค่าการเชื่อมต่อกับระบบ eSign
     1. ไปที่เมนู Settings > Configuration > PABI Web.
     2. เปิด Open Connection to PABI Web. แล้วจะเห็น Field ใหม่ชื่อ Connect e-Sign
-    3. เมื่อคลิกเชื่อมต่อ ระบบจะให้กรอก Host, Database ในการเชื่อมต่อ > Save
+    3. เมื่อคลิกเชื่อมต่อ ระบบจะให้กรอก Host, Database ในการเชื่อมต่อ > Apply
 
         ![](pics/po6_1.png)
     
@@ -265,3 +267,4 @@
 !!! note
 
     * ปุ่ม Verify แบบปกติจะใช้ได้เมื่อ Substate ยังเป็น Ready เท่านั้น เมื่อ Substate ทำงานแล้ว ระบบจะไม่ยอมให้กดปุ่ม (show warning)
+    * กรณีที่ Substate เป็น Waiting Approval หรือ Waiting Supplier Confirm จะไม่สามารถ Cancel หรือ Set to Draft เอกสารได้
