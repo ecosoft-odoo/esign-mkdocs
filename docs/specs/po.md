@@ -245,20 +245,31 @@
 
         ![](pics/po6_3.png)
 
-
-4. ส่ง Email ไปที่ Contacts พร้อมแนบไฟล์ไปด้วย
-
-        NOT DONE, need to talk to Ball Siam on how to API
-
 ---
 
 ### Email เพิ่มเติมตอน State = PO Released
 
 * เพิ่มการส่ง email to [PO committee + PR’s requested by, prepared by + PO’s supplier’s Email]
-* แนบไฟล์ ???
+* แนบไฟล์เอกสารที่ผ่าน e-Sign เรียบร้อยแล้ว
+* เพิ่มปุ่มใหม่สำหรับการส่ง email ชื่อ Release with Send E-mail หลักการทำงานเดียวกับ Release แต่จะมีการส่ง Email เพิ่มเติม
+    ![](pics/po_send_email_1.png)
+* รูปแบบ email จะเป็นดังนี้
+    ![](pics/po_send_email_2.png)
 
-        NOT DONE, waiting for O+ to design eamil/form
+        เรียน คณะกรรมการตรวจรับพัสดุ และผู้เกี่ยวข้อง
 
+        ขอส่งสำเนาใบสั่งซื้อ/จ้าง <objective จาก PD>
+        เลขที่ <PO Number> ซึ่งผู้ขาย/ผู้รับจ้าง <ชื่อ Supplier>
+        ได้ลงนาม PO เรียบร้อยแล้ว (ตามไฟล์แนบ)
+        โดยมีกำหนดการส่งมอบ <condition*> วันถัดจากวันลงนามใบสั่งซื้อ/สั่งจ้าง (ครบกำหนดวันที่ <Contract end date>)
+
+        จึงเรียนมาเพื่อโปรดทราบ
+        ฝ่าย/งานพัสดุ
+
+        --------------------------------------------------
+        *condition: ตรวจสอบข้อมูลของ Fine Condition
+        1. กรณีที่เป็น Day ให้ดูข้อมูลจาก Delivery Within (Days)
+        2. กรณีที่ไม่ใช่ Day ให้ดูข้อมูลจาก Contract Start Date
 ---
 
 ### หมายเหตุเพิ่มเติม
