@@ -3,7 +3,7 @@
 เมื่อสถานะของเอกสาร Purchase Order เปลี่ยนจาก Bid Selection เป็น **Waiting to Verify**
 หัวหน้าพัสดุจะเป็นคนกดปุ่ม "Verify" เพื่อเปลี่ยนสถานะเป็น **Waiting to Release** โดยไม่ต้องมีการอนุมัติใดๆเพิ่มเติม
 
-และกดปุ่ม "Release" เพื่อเปลี่ยนสถานะเป็น **PO Released**
+และเจ้าหน้าที่พัสดุกดปุ่ม "Release" เพื่อเปลี่ยนสถานะเป็น **PO Released**
 
 ## To-Be
 
@@ -21,7 +21,7 @@
 2. PO Verified: หลังจากหัวหน้าเจ้าหน้าที่พัสดุ Verify with eSign Process
 3. Waiting Approval: หลังจากเจ้าหน้าที่พัสดุ Send to Approval เพื่อลงนามโดยบุคคลภายในผ่าน **Camunda Workflow**
 4. PO Approved: เมื่อจบ Camunda Workflow
-5. Waiting Supplier Confirm: เมื่อพนักงานพัสดุ Send to Supplier Confirm เพื่อการลงนามโดยบุคคลภายนอกโดยระบบ **eSign**
+5. Waiting Supplier Confirm: เมื่อเจ้าหน้าที่พัสดุ Send to Supplier Confirm เพื่อการลงนามโดยบุคคลภายนอกโดยระบบ **eSign**
 
 !!! info
 
@@ -61,7 +61,7 @@
 สถานะนี้เป็นการส่งต่อไปที่ Camunda Workflow โดยระบบจะดำเนินการดังต่อไปนี้
 
 1. พิมพ์ฟอร์ม Approve PO Form เป็น attachment แนบไว้กับเอกสาร (on background)
-2. ส่ง Intray Message เพื่อแจ้งเตือนผู้มีส่วนได้เสียให้เข้าไปอนุมัติต่อที่ Camunda
+2. ส่ง Intray Message เพื่อแจ้งเตือนผู้อนุมัติตามสายพัสดุให้เข้าไปอนุมัติต่อที่ Camunda
 3. ยิง API (data + attachment links) เพื่อ start Camunda Workflow
 4. ดึงข้อมูล Workflow จาก Camunda มาไว้ที่ Approval History
 
@@ -73,12 +73,7 @@
 
 #### ส่ง Intray Message
 
-ข้อความแจ้งเตือนจะส่งให้ 4 กลุ่ม โดยดูจากเอกสาร PD
-
-1. เจ้าหน้าที่พัสดุ (Responsible)
-2. หัวหน้าเจ้าหน้าที่พัสดุ (Verified by)
-3. ผู้มีส่วนได้เสีย (Bid Verify)
-4. ผู้มีอำนาจอนุมัติ (PR. Approver)
+ข้อความแจ้งเตือนจะส่งให้ผู้มีอำนาจอนุมัติตามสายพัสดุ
 
 โดยรูปแบบข้อความจะเป็น
 
@@ -134,7 +129,7 @@
 
 ![](pics/po_approval_history.png)
 
-1. สามารถกดปุ่มเพื่อดึง updates
+1. สามารถกดปุ่ม Update Approval History เพื่อดึงข้อมูลการอนุมัติ
 2. ข้อมูลลำดับการอนุมัติ
 3. ตารางแสดง Approval History
 
@@ -155,7 +150,7 @@
 
     1. สถานะหลัก (state) ของเอกสารถูกเปลี่ยนเป็น "Rejected" พร้อมเหตุผลใน Reason Tab
     ![](pics/po5_2.png)
-    2. จบการทำงาน (ผู้ใช้งานต้องกลับไปแก้ไขและส่งเอกสารใหม่)
+    2. จบการทำงาน (เจ้าหน้าที่พัสดุต้องกลับไปแก้ไขและส่งเอกสารใหม่)
 
 - กรณี Approved (action = C1)
 
@@ -163,11 +158,11 @@
     ![](pics/po5.png)
     2. แสดงชื่อผู้อนุมัติคนสุดท้าย (Approved PO by) และวันที่ส่งกลับมา (Approved PO Date) ใน Deliveries & Invoices Tab
     ![](pics/po5_1.png)
-    3. เจ้าหน้าที่พัดสุจะกดปุ่ม Send to Supplier Confirm โดยเลือกผู้เซ็นเอกสารที่ Contact Sign Tab
-        - กรณีที่เป็นบริษัท: แสดงข้อมูลของบุคคลที่อยู่ในบริษัททั้งหมด
-        - กรณีที่เป็นบุคคล: แสดงข้อมูลของบุคคลนั้น
-        - กรณีที่มีบุคคลในบริษัทเพิ่ม เจ้าหน้าที่พัสดุสามารถกด Update Contact Sign เพื่อให้ระบบแสดงรายชื่อใหม่
-        - สามารถเลือกผู้เซ็นเอกสารได้เพียงคนเดียว โดยคลิกที่ Use Sign
+    3. เจ้าหน้าที่พัดสุจะกดปุ่ม Send to Supplier Confirm โดยเลือกผู้ลงนามเอกสารที่ Contact Sign Tab
+        - กรณีที่เป็น Supplier - นิติบุคคล: แสดงข้อมูลของบุคคลที่อยู่ในบริษัททั้งหมด
+        - กรณีที่เป็น Supplier - บุคคล: แสดงข้อมูลของบุคคลนั้น
+        - กรณีที่มีบุคคลใน Supplier - นิติบุคคล เพิ่ม เจ้าหน้าที่พัสดุสามารถกด Update Contact Sign เพื่อให้ระบบแสดงรายชื่อใหม่
+        - สามารถเลือกผู้ลงนามเอกสารได้เพียงคนเดียว โดยคลิกที่ Use Sign
         ![](pics/po5_3.png)
 
 ---
@@ -203,13 +198,13 @@
                 "upload_type": "sent_auth",
                 "upload_file": base64.b64encode(result),  # ไฟล์ pdf จาก Approve PO Form
                 "upload_file_name": u"{}.{}".format(self.name, report_type),
-                "user_id": "123456",  # รหัสพนักงานคนที่ทำรายการ
+                "user_id": "123456",  # รหัสพนักงานเจ้าหน้าที่พัสดุที่ทำรายการ
                 "file_storage_interval_type": "days",
                 "file_storage_interval_number": 5,
                 # public link -> ระบบจะดูจาก url จาก parameter web.base.url และต่อด้วย /get_purchase_state_signed?model=purchase.order&po_id=<id ของเอกสาร PO>
                 "callback_url": "<url>/get_purchase_state_signed?model=purchase.order&po_id=<id po>",
                 "owner_ids": ['abcde@fgh.ijk'],  # email ผู้รับผิดชอบ
-                "partner_ids": [  # ข้อมูลผู้เซ็นเอกสาร
+                "partner_ids": [  # ข้อมูลผู้ลงนามเอกสาร
                     {
                         "is_employee": False,
                         "idcard": signer.vat,
@@ -238,9 +233,9 @@
                 ],
             }
 
-3. ส่งข้อมูลกลับมา เมื่อระบบ eSign ทำกระบวนการเซ็นเอกสารเสร็จสิ้น
+3. ส่งข้อมูลกลับมา เมื่อระบบ eSign ทำกระบวนการลงนามเอกสารเสร็จสิ้น
     - eSign จะเรียก function callback_url จากข้อมูลที่ระบบส่งไป
-    - เมื่อ call function ระบบจะดึงข้อมูล pdf ที่มีการเซ็นแล้วในระบบ eSign มาเก็บไว้ใน Attachment เพิ่มเติม โดยมีชื่อ "_signed" ต่อท้าย
+    - เมื่อ call function ระบบจะดึงข้อมูล pdf ที่มีการลงนามแล้วในระบบ eSign มาเก็บไว้ใน Attachment เพิ่มเติม โดยมีชื่อ "_signed" ต่อท้าย
     - สถานะเปลี่ยนเป็น Waiting to Release
 
         ![](pics/po6_3.png)
