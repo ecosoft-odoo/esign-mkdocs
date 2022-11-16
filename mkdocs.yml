@@ -16,8 +16,7 @@ nav:
   - Specs:
       - Call for Bid: specs/pd.md
       - Purchase Order: specs/po.md
-      # - Call for Bid: specs/pd.md
-      # - Purchase Order: specs/po.md
+      - Partner Register: specs/partner.md
   - Manual:
       - Overview: manual/overview.md
   - Meetings:
