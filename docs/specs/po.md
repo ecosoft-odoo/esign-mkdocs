@@ -50,7 +50,7 @@
 
 1. เลือก Approve PO Form เพื่อเตรียมแนบเป็น attachment
 2. กดปุ่ม Send to Approval
-3. กรณีที่มีการยกเลิก / เปลี่ยนแปลงการทำเอกสาร
+3. Back To Ready: กรณีที่มีการยกเลิก / เปลี่ยนแปลงการทำเอกสาร
 
 ---
 
@@ -62,7 +62,7 @@
 
 1. พิมพ์ฟอร์ม Approve PO Form เป็น attachment แนบไว้กับเอกสาร (on background)
 2. ส่ง Intray Message เพื่อแจ้งเตือนผู้อนุมัติตามสายพัสดุให้เข้าไปอนุมัติต่อที่ Camunda
-3. ยิง API (data + attachment links) เพื่อ start Camunda Workflow
+3. ส่งค่าผ่าน API (data + attachment links) เพื่อ start Camunda Workflow
 4. ดึงข้อมูล Workflow จาก Camunda มาไว้ที่ Approval History
 
 #### พิมพ์ฟอร์ม Approve PO Form
@@ -84,7 +84,7 @@
 
 ![](pics/po4_2.png)
 
-#### ยิง API start Camunda Workflow
+#### ส่งค่าผ่าน API start Camunda Workflow
 
 การตั้งค่าระบบเชื่อมกับ Camunda Workflow
 
@@ -188,7 +188,7 @@
         - esign_password: กรอก password สำหรับเชื่อมต่อระบบ eSign
 
 
-2. ยิง API ไปที่ eSign โดยส่งไฟล์ PDF ของ Approve PO Form ไปด้วย
+2. ส่งค่าผ่าน API ไปที่ eSign โดยส่งไฟล์ PDF ของ Approve PO Form ไปด้วย
 
     - ข้อมูลส่งเข้า eSign
 
