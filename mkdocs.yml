@@ -16,9 +16,9 @@ nav:
   - Specs:
       - Call for Bid: specs/pd.md
       - Purchase Order: specs/po.md
-      - Partner Register: specs/partner.md
-  - Manual:
-      - Overview: manual/overview.md
+      - Partner: specs/partner.md
+  # - Manual:
+  #     - Overview: manual/overview.md
   - Meetings:
       - 02/08/2022: meetings/02-08-2022.md
 markdown_extensions:

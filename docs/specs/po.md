@@ -158,7 +158,7 @@
     ![](pics/po5.png)
     2. แสดงชื่อผู้อนุมัติคนสุดท้าย (Approved PO by) และวันที่ส่งกลับมา (Approved PO Date) ใน Deliveries & Invoices Tab
     ![](pics/po5_1.png)
-    3. เจ้าหน้าที่พัดสุจะกดปุ่ม Send to Supplier Confirm โดยเลือกผู้ลงนามเอกสารที่ Contact Sign Tab
+    3. เจ้าหน้าที่พัสดุจะกดปุ่ม Send to Supplier Confirm โดยเลือกผู้ลงนามเอกสารที่ Contact Sign Tab
         - กรณีที่เป็น Supplier - นิติบุคคล: แสดงข้อมูลของบุคคลที่อยู่ในบริษัททั้งหมด
         - กรณีที่เป็น Supplier - บุคคล: แสดงข้อมูลของบุคคลนั้น
         - กรณีที่มีบุคคลใน Supplier - นิติบุคคล เพิ่ม เจ้าหน้าที่พัสดุสามารถกด Update Contact Sign เพื่อให้ระบบแสดงรายชื่อใหม่
